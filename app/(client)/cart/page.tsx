@@ -1,5 +1,5 @@
 'use client'
-import { MetaData } from '@/actions/createCheckoutSession'
+import { createCheckoutSession, MetaData } from '@/actions/createCheckoutSession'
 import Container from '@/components/Container'
 import EmptyCart from '@/components/EmptyCart'
 import Loading from '@/components/Loading'
@@ -39,8 +39,13 @@ const CartPage = () => {
         clerkUserId:user!?.id
       }
       
-    } catch (error) {
+      const checkoutUrl=await createCheckoutSession(getGroupItem,metadata)
+      if(checkoutUrl){
+        console.log("checkoutUrl",checkoutUrl);
+      }
       
+    } catch (error) {
+      console.error('Error creating checkout session:',error)
     }finally{
       setIsLoading(false)
     }

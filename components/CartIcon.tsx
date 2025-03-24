@@ -2,16 +2,7 @@
 import userCartStore from '@/store'
 import { ShoppingBag } from 'lucide-react'
 import Link from 'next/link'
-// import { useEffect, useState } from 'react'
-
 const CartIcon = () => {
-  // const [isClient,setIsClient]=useState(false)
-  // useEffect(()=>{
-  // setIsClient(true)
-  // },[])
-  // if(!isClient){
-  //   return null
-  // }
 const getGroupItem=userCartStore((state)=>state.getGroupItem())
   
   return (
