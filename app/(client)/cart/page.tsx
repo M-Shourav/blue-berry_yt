@@ -15,6 +15,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 const CartPage = () => {
   const {getItemCount,getSubTotalPrice,getTotalPrice,resetCart,deleteCartProduct}=userCartStore()
@@ -41,7 +42,7 @@ const CartPage = () => {
       
       const checkoutUrl=await createCheckoutSession(getGroupItem,metadata)
       if(checkoutUrl){
-        console.log("checkoutUrl",checkoutUrl);
+        window.location.href=checkoutUrl
       }
       
     } catch (error) {
@@ -99,7 +100,12 @@ const CartPage = () => {
               </div>
               </div>
               <div className='space-y-4 py-5 flex flex-col items-center'>
-                <Button onClick={handleCheckOut} className='w-full cursor-pointer'>Proceed to checkout</Button>
+                <Button onClick={handleCheckOut} className='w-full cursor-pointer' disabled={isLoading}>
+                  {isLoading ? <div className='flex items-center justify-center gap-x-5 w-full text-base'>
+                    <p>Processing...</p>
+                    <span className='text-xl animate-spin'><AiOutlineLoading3Quarters/></span>
+                  </div> :"Proceed to checkout"}
+                </Button>
                 <Link href={'/'} className='text-base font-semibold hover:underline hover:text-blue-400 duration-300'>Continue Shopping</Link>
               </div>
               </div>
@@ -143,6 +149,7 @@ const CartPage = () => {
               </div>
             </div>
           </div>
+          {/* mobile */}
         <div className='md:hidden w-full'>
         <div className='p-4 rounded-lg border mx-4'>
               <h2 className='text-xl font-semibold mb-4'>Order summary</h2>
@@ -166,7 +173,12 @@ const CartPage = () => {
               </div>
               </div>
               <div className='space-y-4 py-5 flex flex-col items-center'>
-                <Button onClick={handleCheckOut} className='w-full cursor-pointer'>Proceed to checkout</Button>
+              <Button onClick={handleCheckOut} className='w-full cursor-pointer' disabled={isLoading}>
+                  {isLoading ? <div className='flex items-center justify-center gap-x-5 w-full text-base'>
+                    <p>Processing...</p>
+                    <span className='text-xl animate-spin'><AiOutlineLoading3Quarters/></span>
+                  </div> :"Proceed to checkout"}
+                </Button>
                 <Link href={'/'} className='text-base font-semibold hover:underline hover:text-blue-400 duration-300'>Continue Shopping</Link>
               </div>
           </div>
