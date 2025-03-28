@@ -13,7 +13,12 @@ const CartIcon = () => {
       <ShoppingBag className="w-6 h-6 text-blue-400" />
       <div className="flex flex-col">
         <div className="text-xs font-semibold flex items-center gap-x-1">
-          <span>{getGroupItem.length > 0 ? getGroupItem.length : 0}</span> items
+          <span>
+            {getGroupItem.length && getGroupItem.length > 0
+              ? getGroupItem.length
+              : 0}
+          </span>
+          items
         </div>
         <p className="text-sm font-semibold">Cart</p>
       </div>
