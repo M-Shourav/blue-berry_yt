@@ -42,7 +42,7 @@ export async function POST(req: NextRequest) {
       console.error("Order created in sanity error", error);
       return NextResponse.json(
         { error: `Order created in sanity error ${error}` },
-        { status: 400 }
+        { status: 500 }
       );
     }
   }
