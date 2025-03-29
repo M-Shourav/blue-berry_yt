@@ -9,11 +9,18 @@ import {
   TooltipTrigger,
 } from "./ui/tooltip";
 import PriceFormatter from "./PriceFormatter";
+import OrderDetailsDialog from "./OrderDetailsDialog";
 
 const OrdersComponents = ({ orders }: { orders: MY_ORDERS_QUERYResult }) => {
   const [selectedOrder, setSelectedOrder] = useState<
     MY_ORDERS_QUERYResult[number] | null
   >(null);
+
+  const handleOrderClicked = (order: MY_ORDERS_QUERYResult[number]) => {
+    setSelectedOrder(order);
+  };
+  console.log(selectedOrder);
+
   return (
     <>
       <TableBody>
@@ -21,7 +28,10 @@ const OrdersComponents = ({ orders }: { orders: MY_ORDERS_QUERYResult }) => {
           {orders?.map((order) => (
             <Tooltip key={order?.orderNumber}>
               <TooltipTrigger asChild>
-                <TableRow className=" cursor-pointer bg-gray-100 h-12">
+                <TableRow
+                  onClick={() => handleOrderClicked(order)}
+                  className=" cursor-pointer bg-gray-100 h-12"
+                >
                   <TableCell>
                     {order?.orderNumber?.slice(-10) ?? "N/A"}...
                   </TableCell>
@@ -54,6 +64,11 @@ const OrdersComponents = ({ orders }: { orders: MY_ORDERS_QUERYResult }) => {
           ))}
         </TooltipProvider>
       </TableBody>
+      <OrderDetailsDialog
+        order={selectedOrder}
+        isOpen={!!selectedOrder}
+        onClose={() => setSelectedOrder(null)}
+      />
     </>
   );
 };

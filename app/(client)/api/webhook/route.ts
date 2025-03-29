@@ -37,7 +37,7 @@ export async function POST(req: NextRequest) {
   if (event.type === "checkout.session.completed") {
     const session = event.data.object as Stripe.Checkout.Session;
     try {
-      const order = await createOrderSanity(session);
+      await createOrderSanity(session);
     } catch (error) {
       console.error("Order created in sanity error", error);
       return NextResponse.json(
