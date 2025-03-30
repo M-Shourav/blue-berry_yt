@@ -21,7 +21,6 @@ const CategorySelector = ({ categories }: Props) => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
   const router = useRouter();
-  let selectedCategories;
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
@@ -44,7 +43,7 @@ const CategorySelector = ({ categories }: Props) => {
             className="h-9"
             onKeyDown={(e) => {
               if (e.key === "Enter") {
-                selectedCategories = categories.find((c) =>
+                categories.find((c) =>
                   c.title
                     ?.toLowerCase()
                     .includes(e.currentTarget.value.toLowerCase())
