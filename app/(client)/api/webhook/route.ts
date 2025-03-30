@@ -49,7 +49,7 @@ export async function POST(req: NextRequest) {
   return NextResponse.json({ received: true });
 }
 
-export async function createOrderSanity(session: Stripe.Checkout.Session) {
+async function createOrderSanity(session: Stripe.Checkout.Session) {
   const {
     id,
     amount_total,
