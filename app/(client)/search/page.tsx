@@ -2,14 +2,13 @@ import Container from "@/components/Container";
 import ProductGrid from "@/components/ProductGrid";
 import { getSearchProductQuery } from "@/sanity/helpers";
 import { FcSearch } from "react-icons/fc";
-interface Props {
-  searchParams: {
-    query: string;
-  };
-}
 
-const SearchPage = async ({ searchParams }: Props) => {
-  const { query } = searchParams;
+const SearchPage = async ({
+  searchParams,
+}: {
+  searchParams: Promise<{ query: string }>;
+}) => {
+  const { query } = await searchParams;
   const product = await getSearchProductQuery(query);
   return (
     <Container className="py-10">
