@@ -23,7 +23,7 @@ const SearchPage = async ({ searchParams }: Props) => {
               Oops! No product found for <span>{query}</span>
             </h1>
             <p className="text-[15px] text-muted-foreground">
-              Sorry, we couldn't find what you're looking for Try a different
+              Sorry, we could not find what you are looking for Try a different
               keyword
             </p>
           </div>
